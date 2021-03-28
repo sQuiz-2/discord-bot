@@ -1,0 +1,7 @@
+const DISCORD_TOKEN = process.env.DISCORD_TOKEN;
+const DISCORD_CHANNEL_ID = process.env.DISCORD_CHANNEL_ID || '818891053468745839';
+const DISCORD_COMMAND_PREFIX = process.env.DISCORD_COMMAND_PREFIX || '?';
+const DISCORD_LOGO_URL =
+  process.env.DISCORD_LOGO_URL || 'https://www.zupimages.net/up/21/12/kemw.png';
+
+export { DISCORD_TOKEN, DISCORD_CHANNEL_ID, DISCORD_COMMAND_PREFIX, DISCORD_LOGO_URL };
