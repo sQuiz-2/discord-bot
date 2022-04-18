@@ -1,5 +1,6 @@
-import { DISCORD_LOGO_URL } from '../config/Discord';
 import { Message, MessageEmbed } from 'discord.js';
+
+import { DISCORD_LOGO_URL } from '../config/Discord';
 
 function run(message: Message) {
   const embedMessage = new MessageEmbed()

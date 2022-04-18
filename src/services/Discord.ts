@@ -1,7 +1,8 @@
+import { Client, Message, MessageEmbed, TextChannel } from 'discord.js';
+
 import About from '../commands/about';
 import Help from '../commands/help';
 import { DISCORD_CHANNEL_ID, DISCORD_COMMAND_PREFIX, DISCORD_TOKEN } from '../config/Discord';
-import { Client, Message, MessageEmbed, TextChannel } from 'discord.js';
 
 enum Commands {
   Help = 'help',
