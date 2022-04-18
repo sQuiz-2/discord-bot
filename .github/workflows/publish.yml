@@ -19,7 +19,7 @@ jobs:
         with:
           registry: ghcr.io
           username: ${{ github.repository_owner }}
-          password: ${{ secrets.CR_PAT }}
+          password: ${{ secrets.REGISTRY_PAT }}
       - name: Cache Docker layers
         uses: actions/cache@v2
         with:
@@ -29,4 +29,4 @@ jobs:
       - uses: docker/build-push-action@v2
         with:
           push: true
-          tags: ghcr.io/squiz-2/core/discord-bot:latest
+          tags: ghcr.io/squiz-2/discord-bot:latest
