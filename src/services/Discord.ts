@@ -1,42 +1,24 @@
-import { Client, Message, MessageEmbed, TextChannel } from 'discord.js';
+import { Client, MessageEmbed, TextChannel } from 'discord.js';
 
-import About from '../commands/about';
-import Help from '../commands/help';
-import { DISCORD_CHANNEL_ID, DISCORD_COMMAND_PREFIX, DISCORD_TOKEN } from '../config/Discord';
-
-enum Commands {
-  Help = 'help',
-  About = 'about',
-}
+import { DISCORD_CHANNEL_IDS, DISCORD_TOKEN } from '../config/Discord';
 
 class Discord {
   client = new Client();
 
-  constructor() {
-    this.client.on('message', this.onMessage.bind(this));
-    this.client.login(DISCORD_TOKEN);
-  }
-
-  onMessage(message: Message) {
-    if (message.channel.id !== DISCORD_CHANNEL_ID) return;
-    if (!message.content.startsWith(DISCORD_COMMAND_PREFIX)) return;
-
-    const args = message.content.slice(DISCORD_COMMAND_PREFIX.length).split(/ +/);
-    const commandName = args?.shift()?.toLowerCase();
-    if (!commandName) return;
-    if (commandName === Commands.Help) {
-      Help.run(message);
-    } else if (commandName === Commands.About) {
-      About.run(message);
+  async login() {
+    try {
+      await this.client.login(DISCORD_TOKEN);
+    } catch (error) {
+      console.error(error);
     }
   }
 
   async sendMessage(message: MessageEmbed) {
-    const channel = this.client.channels.cache.find(
-      (channel) => channel.id === DISCORD_CHANNEL_ID
-    ) as TextChannel;
-    if (!channel) return;
-    channel.send(message);
+    DISCORD_CHANNEL_IDS.forEach(async (channelId) => {
+      const channel = (await this.client.channels.fetch(channelId)) as TextChannel;
+      if (!channel) return;
+      channel.send(message);
+    });
   }
 }
 
