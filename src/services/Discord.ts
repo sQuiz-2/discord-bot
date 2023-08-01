@@ -15,9 +15,12 @@ class Discord {
 
   async sendMessage(message: MessageEmbed) {
     DISCORD_CHANNEL_IDS.forEach(async (channelId) => {
-      const channel = (await this.client.channels.fetch(channelId)) as TextChannel;
-      if (!channel) return;
-      channel.send(message);
+      try {
+        const channel = (await this.client.channels.fetch(channelId)) as TextChannel;
+        channel.send(message);
+      } catch (error) {
+        console.log(error);
+      }
     });
   }
 }
